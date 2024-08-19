@@ -76,8 +76,10 @@ ui <- bs4DashPage(
         title = "Data Filters",
         dateRangeInput("mapRange",
           "Date Range: ",
-          start = min(incidents$date),
-          end = min(incidents$date) %m+% months(1),
+          start = tryCatch({min(incidents$date) %m+% days(-1)}, 
+                           error = function(e) {Sys.Date() %m+% days(-1)}),
+          end = tryCatch({min(incidents$date) %m+% days(1)}, 
+                         error = function(e) {Sys.Date() %m+% days(-2)}),
           min = min(incidents$date),
           max = max(incidents$date)
         ),
@@ -99,18 +101,22 @@ ui <- bs4DashPage(
             "Homicide" = "Homicide",
             "Community Policing" = "Community Policing"
           ),
-          selected = unique(incidents$parentIncidentTypeId)
+          selected = unique(incidents$parentIncidentType)
         )
       ),
       controlbarItem(
         title = "Scrape Data",
-        dateRangeInput("test",
+        dateRangeInput("scrape_date_range",
           "Date Range: ",
-          start = Sys.Date() %m+% months(-1),
+          start = Sys.Date() %m+% days(-2),
           end = Sys.Date() %m+% days(-1),
-          min = Sys.Date() %m+% days(-366),
+          min = Sys.Date() %m+% days(-364),
           max = Sys.Date() %m+% days(-1)
-        )
+        ),
+        actionButton(inputId = "load_data", label = "Load Data"),
+        p("This might take a few minutes depending on your selected date range"),
+        br(),
+        textOutput("status")
       )
     )
   ),
