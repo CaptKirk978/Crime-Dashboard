@@ -34,26 +34,28 @@ ui <- bs4DashPage(
         tabName = "Summary",
         fluidRow(
           infoBox(
-            title = "Total Incidents",
+            title = "# of Incidents",
+            subtitle = NULL,
+            icon = icon("triangle-exclamation"),
+            fill = TRUE,
+            color = "primary",
+            textOutput("total_incidents")
+          ),
+          infoBox(
+            title = "# of Crimes",
+            subtitle = NULL,
             icon = icon("handcuffs"),
             fill = TRUE,
             color = "primary",
-            textOutput("total_incidents"),
-            "Content of Box 1"
+            textOutput("total_crime")
           ),
           infoBox(
-            title = "Crime",
-            icon = ,
+            title = "Misc. Calls",
+            subtitle = NULL,
+            icon = icon("truck-medical"),
             fill = TRUE,
             color = "primary",
-            "Content of Box 2"
-          ),
-          infoBox(
-            title = "Not Crime",
-            icon = ,
-            fill = TRUE,
-            color = "primary",
-            "Content of Box 3"
+            textOutput("total_misc")
           )
         ),
         fluidRow(

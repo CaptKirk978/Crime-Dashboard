@@ -5,7 +5,7 @@ server = function(input, output, session) {
   
   
   observeEvent(input$load_data, {
-    dir.create("./Data", showWarnings = F)
+    dir.create("./Data", showWarnings = FALSE)
     
     scrape_dates <- input$scrape_date_range
 
@@ -48,7 +48,7 @@ server = function(input, output, session) {
                       "<br>",
                       map$parentIncidentType,
                       "<br>",
-                      map$narrative
+                      map$incidentType
                       ),
         clusterOptions = markerClusterOptions()
       )
@@ -64,17 +64,40 @@ server = function(input, output, session) {
         filter(`date` >= input$mapRange[1], `date` <= input$mapRange[2],
                parentIncidentType %in% c(input$crime_filter))
       
-      nrow(total_incdnts)
+      paste(nrow(total_incdnts), "Incident(s)")
     } else {
       return(0)
     }
-    
-    total_incdnts <- rv$incidents %>% 
-      filter(`date` >= input$mapRange[1], `date` <= input$mapRange[2],
-             parentIncidentType %in% c(input$crime_filter))
-    
-      nrow(total_incdnts)
-    
+  })
+  
+  output$total_crime <- renderText({
+    if (!is.null(rv$incidents)) {
+      crime <- rv$incidents %>% 
+        filter(`date` >= input$mapRange[1], `date` <= input$mapRange[2],
+               parentIncidentType %in% c("Theft from Vehicle", "Robbery", "Theft",
+                                         "Theft of Vehicle", "Sexual Offense", "Assault", 
+                                         "Property Crime", "Breaking & Entering", "Homicide"),
+               parentIncidentType %in% c(input$crime_filter))
+      
+      paste(nrow(crime), "Crime(s)")
+    } else {
+      return(0)
+    }
+  })
+  
+  output$total_misc <- renderText({
+    if (!is.null(rv$incidents)) {
+      misc <- rv$incidents %>% 
+        filter(`date` >= input$mapRange[1], `date` <= input$mapRange[2],
+               !parentIncidentType %in% c("Theft from Vehicle", "Robbery", "Theft",
+                                         "Theft of Vehicle", "Sexual Offense", "Assault", 
+                                         "Property Crime", "Breaking & Entering", "Homicide"),
+               parentIncidentType %in% c(input$crime_filter))
+      
+      paste(nrow(misc), "Call(s)")
+    } else {
+      return(0)
+    }
   })
   
 }
