@@ -2,7 +2,7 @@ ui <- bs4DashPage(
   help = NULL,
   dark = TRUE,
   title = "Indiana Crime Dashboard",
-  fullscreen = T,
+  fullscreen = TRUE,
   header = dashboardHeader(
     title = dashboardBrand(
       title = "Crime Dashboard",
@@ -36,7 +36,7 @@ ui <- bs4DashPage(
           infoBox(
             title = "Total Incidents",
             icon = icon("handcuffs"),
-            fill = T,
+            fill = TRUE,
             color = "primary",
             textOutput("total_incidents"),
             "Content of Box 1"
@@ -44,14 +44,14 @@ ui <- bs4DashPage(
           infoBox(
             title = "Crime",
             icon = ,
-            fill = T,
+            fill = TRUE,
             color = "primary",
             "Content of Box 2"
           ),
           infoBox(
             title = "Not Crime",
             icon = ,
-            fill = T,
+            fill = TRUE,
             color = "primary",
             "Content of Box 3"
           )

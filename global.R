@@ -17,7 +17,7 @@ read_in_incidents <- function() {
   if (length(incident_files) == 0) return(NULL)
   
   vroom(incident_files) %>% 
-    distinct(`id`, .keep_all = T)
+    distinct(`id`, .keep_all = TRUE)
 }
 
 
@@ -52,7 +52,7 @@ scrape_incidents <- function(scrape_from_date, scrape_to_date) {
     print(request_count)
     
     next_payload <- json[["navigation"]][["nextPagePath"]][["requestData"]]
-    payload <- toJSON(next_payload, auto_unbox = T)
+    payload <- toJSON(next_payload, auto_unbox = TRUE)
     response <- POST(url, add_headers("Content-Type" = "application/json"), body = payload)
     
     raw_json <- content(response, as = "text")
@@ -75,10 +75,10 @@ scrape_incidents <- function(scrape_from_date, scrape_to_date) {
   total_incidents[c('Long', 'Lat')] <- str_split_fixed(total_incidents$location$coordinates, ',', 2)
   
   total_incidents <- total_incidents %>% 
-    distinct(`id`, .keep_all = T) %>%  
+    distinct(`id`, .keep_all = TRUE) %>%  
     select(-c(location))
   
-  write.csv(total_incidents, file = paste0("./Data/Incidents_", from_date, "-", to_date, ".csv"), row.names = F)
+  write.csv(total_incidents, file = paste0("./Data/Incidents_", from_date, "-", to_date, ".csv"), row.names = FALSE)
 
   
   
