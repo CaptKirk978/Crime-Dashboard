@@ -17,9 +17,7 @@ read_in_incidents <- function() {
   if (length(incident_files) == 0) return(NULL)
   
   vroom(incident_files) %>% 
-    distinct(`id`, .keep_all = T) %>% 
-    mutate(Lat = as.numeric(`Lat`),
-           Long = as.numeric(`Long`))
+    distinct(`id`, .keep_all = T)
 }
 
 
