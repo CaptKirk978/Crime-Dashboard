@@ -5,6 +5,8 @@ server = function(input, output, session) {
   
   
   observeEvent(input$load_data, {
+    dir.create("./Data", showWarnings = F)
+    
     scrape_dates <- input$scrape_date_range
 
     scrape_incidents(scrape_dates[1], scrape_dates[2])
