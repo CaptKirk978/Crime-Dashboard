@@ -36,11 +36,13 @@ server = function(input, output, session) {
         lng = as.numeric(map$Long),
         lat = as.numeric(map$Lat),
         radius = 5,
-        popup = paste(map$parentIncidentType,
+        popup = paste(map$date,
                       "<br>",
                       map$blockizedAddress,
                       "<br>",
-                      map$date
+                      map$parentIncidentType,
+                      "<br>",
+                      map$narrative
                       ),
         clusterOptions = markerClusterOptions()
       )
