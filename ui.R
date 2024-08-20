@@ -1,11 +1,11 @@
 ui <- bs4DashPage(
   help = NULL,
   dark = TRUE,
-  title = "Bailey Kirk's Dashboard",
+  title = "Indiana Crime Dashboard",
   fullscreen = T,
   header = dashboardHeader(
     title = dashboardBrand(
-      title = "Bailey Kirk",
+      title = "Crime Dashboard",
       color = "primary",
       href = "https://baileykirk.work",
       image = "https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png"
@@ -57,7 +57,7 @@ ui <- bs4DashPage(
           )
         ),
         fluidRow(
-          leafletOutput("map_with_points", height = "70vh")
+          leafletOutput("map_with_points", height = "65vh")
         )
       ),
       bs4TabItem(

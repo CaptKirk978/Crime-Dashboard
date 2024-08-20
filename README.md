@@ -7,7 +7,7 @@ This project is an R Shiny web application designed to visualize "incident" data
 ### **1. Prerequisites**
 
 -   R (built with version 4.1.1)
--   RStudio (recommended)
+-   RStudio (optional but recommended)
 
 ### **2. Clone the Repository**
 
@@ -28,7 +28,7 @@ install.packages(c("shiny", "bs4Dash", "leaflet", "vroom", "dplyr", "lubridate",
 
 ### **1. Run the application**
 
-To run the application, execute the following code in an R console with updated arguments for your local machine.
+To run the application, execute the following code in an R console with updated arguments for your local machine. Alternatively, if you open the project in R Studio you can use the "Run App" button.
 
 ```{r}
 shiny::runApp(
