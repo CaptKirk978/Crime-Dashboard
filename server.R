@@ -16,6 +16,12 @@ server = function(input, output, session) {
     if (!is.null(new_incidents)) {
       
       rv$incidents <- new_incidents
+      updateDateRangeInput(
+        session,
+        inputId = "mapRange",
+        min = min(rv$incidents$date),   
+        max = max(rv$incidents$date)
+      )
       
       output$status <- renderText("Data successfully loaded!")
       
