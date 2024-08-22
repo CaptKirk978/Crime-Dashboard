@@ -1,6 +1,6 @@
 # **Indiana Crime Data Dashboard**
 
-This project is an R Shiny web application designed to visualize "incident" data across Marion County, Indiana. It features an interactive map and general statistics on the date range selected. The application also features a user interface for scraping new incident data from <https://cityprotect.com> using a modified API to capture the entire county.
+This project is an R Shiny web application designed to visualize "incident" data across Marion County, Indiana. It features an interactive map and general statistics on the date range selected. The application also features a user interface for scraping new incident data from <https://cityprotect.com> using a modified API to capture the entire county. Scraping of data is necessary to get latitude and longitude data associated with each incident.
 
 ## **Installation** {#installation}
 
