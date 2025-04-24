@@ -8,19 +8,6 @@ library(httr)
 library(jsonlite)
 library(stringr)
 
-read_in_incidents <- function() {
-  
-  data_folder <- "./data/"  
-  
-  incident_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
-  
-  if (length(incident_files) == 0) return(NULL)
-  
-  vroom(incident_files) %>% 
-    distinct(`id`, .keep_all = TRUE)
-}
-
-
 scrape_incidents <- function(scrape_from_date, scrape_to_date) {
   
   from_date <- paste0('\"', format(scrape_from_date, "%Y-%m-%dT%H:%M:%S.000Z"), '\"')
@@ -66,7 +53,7 @@ scrape_incidents <- function(scrape_from_date, scrape_to_date) {
     total_incidents <- total_incidents %>% 
       bind_rows(incidents)
   }
-
+  
   
   
   total_incidents$location$coordinates <- gsub("\\(", "", total_incidents$location$coordinates)
@@ -79,10 +66,28 @@ scrape_incidents <- function(scrape_from_date, scrape_to_date) {
     select(-c(location))
   
   write.csv(total_incidents, file = gsub("[\":]", "", paste0("./Data/Incidents_", from_date, "-", to_date, ".csv")), row.names = FALSE)
-
+  
   
   
 }
+
+
+read_in_incidents <- function() {
+  
+  data_folder <- "./data/"  
+  
+  incident_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
+  
+  if (length(incident_files) == 0) {
+    scrape_incidents(Sys.Date() -2, Sys.Date())
+  }
+  
+  incident_files <- list.files(data_folder, pattern = "\\.csv$", full.names = TRUE)
+  
+  vroom(incident_files) %>% 
+    distinct(`id`, .keep_all = TRUE)
+}
+
 
 incidents <- read_in_incidents() 
 
