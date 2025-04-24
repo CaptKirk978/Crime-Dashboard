@@ -2,7 +2,9 @@
 
 This project is an R Shiny web application designed to visualize "incident" data across Marion County, Indiana. It features an interactive map and general statistics on the date range selected. The application also features a user interface for scraping new incident data from <https://cityprotect.com> using a modified API to capture the entire county. Scraping of data is necessary to get latitude and longitude data associated with each incident.
 
-## **Installation** {#installation}
+![Dashboard](Dashboard-Screenshot.png)
+
+## **Installation**
 
 ### **1. Prerequisites**
 
@@ -24,7 +26,7 @@ Open an R console and run the following command to install the required packages
 install.packages(c("shiny", "bs4Dash", "leaflet", "vroom", "dplyr", "lubridate", "httr", "jsonlite", "stringr"))
 ```
 
-## **Usage** {#usage}
+## **Usage**
 
 ### **1. Run the application**
 
