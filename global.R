@@ -78,7 +78,7 @@ scrape_incidents <- function(scrape_from_date, scrape_to_date) {
     distinct(`id`, .keep_all = TRUE) %>%  
     select(-c(location))
   
-  write.csv(total_incidents, file = paste0("./Data/Incidents_", from_date, "-", to_date, ".csv"), row.names = FALSE)
+  write.csv(total_incidents, file = gsub("[\":]", "", paste0("./Data/Incidents_", from_date, "-", to_date, ".csv")), row.names = FALSE)
 
   
   
